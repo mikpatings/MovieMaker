@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4K Iron Man Themed Grid Background</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: #000000;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .grid-container {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #0a0a1a 0%, #000000 70%);
+            background-image: 
+                linear-gradient(#1a237e 1px, transparent 1px),
+                linear-gradient(90deg, #1a237e 1px, transparent 1px);
+            background-size: 50px 50px;
+            position: relative;
+        }
+
+        .grid-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(26, 35, 126, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26, 35, 126, 0.3) 1px, transparent 1px);
+            background-size: 10px 10px;
+        }
+
+        .arc-reactor-subtle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 2px solid rgba(26, 35, 126, 0.4);
+            background: radial-gradient(circle, transparent 60%, rgba(26, 35, 126, 0.1) 70%, transparent 80%);
+        }
+
+        .arc-reactor-subtle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 60%;
+            border-radius: 50%;
+            border: 1px solid rgba(26, 35, 126, 0.3);
+        }
+
+        .arc-reactor-subtle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20%;
+            height: 20%;
+            border-radius: 50%;
+            background: rgba(26, 35, 126, 0.2);
+        }
+
+        .corner-elements {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 1px solid rgba(26, 35, 126, 0.4);
+        }
+
+        .corner-elements.top-left {
+            top: 40px;
+            left: 40px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-elements.top-right {
+            top: 40px;
+            right: 40px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-elements.bottom-left {
+            bottom: 40px;
+            left: 40px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-elements.bottom-right {
+            bottom: 40px;
+            right: 40px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .tech-lines {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(26, 35, 126, 0.3) 50%, transparent 100%);
+        }
+
+        .tech-lines.line1 {
+            top: 25%;
+        }
+
+        .tech-lines.line2 {
+            top: 75%;
+        }
+
+        .tech-lines-vertical {
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(0deg, transparent 0%, rgba(26, 35, 126, 0.3) 50%, transparent 100%);
+        }
+
+        .tech-lines-vertical.line1 {
+            left: 25%;
+        }
+
+        .tech-lines-vertical.line2 {
+            left: 75%;
+        }
+
+        .hexagon-pattern {
+            position: absolute;
+            top: 20%;
+            right: 10%;
+            width: 60px;
+            height: 60px;
+            border: 1px solid rgba(26, 35, 126, 0.2);
+            transform: rotate(30deg);
+        }
+
+        .hexagon-pattern::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            border: 1px solid rgba(26, 35, 126, 0.2);
+        }
+
+        .hexagon-pattern::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            border: 1px solid rgba(26, 35, 126, 0.2);
+        }
+
+        /* 4K optimized sizing */
+        @media (min-width: 2560px) {
+            .grid-container {
+                background-size: 70px 70px;
+            }
+            
+            .grid-container::before {
+                background-size: 14px 14px;
+            }
+            
+            .arc-reactor-subtle {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .corner-elements {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        @media (min-width: 3840px) {
+            .grid-container {
+                background-size: 100px 100px;
+            }
+            
+            .grid-container::before {
+                background-size: 20px 20px;
+            }
+            
+            .arc-reactor-subtle {
+                width: 400px;
+                height: 400px;
+            }
+            
+            .corner-elements {
+                width: 160px;
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="arc-reactor-subtle"></div>
+        
+        <div class="corner-elements top-left"></div>
+        <div class="corner-elements top-right"></div>
+        <div class="corner-elements bottom-left"></div>
+        <div class="corner-elements bottom-right"></div>
+        
+        <div class="tech-lines line1"></div>
+        <div class="tech-lines line2"></div>
+        <div class="tech-lines-vertical line1"></div>
+        <div class="tech-lines-vertical line2"></div>
+        
+        <div class="hexagon-pattern"></div>
+    </div>
+</body>
+</html>
