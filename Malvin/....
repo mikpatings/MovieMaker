@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Man HUD Interface</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono:wght@400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            font-family: 'Share Tech Mono', monospace;
+            color: #4a9eff;
+            overflow: hidden;
+            height: 100vh;
+            cursor: none;
+        }
+
+        .hud-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at center, rgba(74, 158, 255, 0.03) 0%, transparent 70%);
+        }
+
+        .scan-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(74, 158, 255, 0.02) 3px,
+                rgba(74, 158, 255, 0.02) 6px
+            );
+            pointer-events: none;
+            animation: scanlines 3s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(6px); }
+        }
+
+        .crosshair {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 1px solid #4a9eff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.7;
+            transition: all 0.1s ease;
+        }
+
+        .crosshair::before,
+        .crosshair::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: #4a9eff;
+        }
+
+        .crosshair::before {
+            width: 12px;
+            height: 1px;
+            transform: translate(-50%, -50%);
+        }
+
+        .crosshair::after {
+            width: 1px;
+            height: 12px;
+            transform: translate(-50%, -50%);
+        }
+
+        .main-hud {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+        }
+
+        .outer-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #4a9eff;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: rotate 20s linear infinite;
+        }
+
+        .inner-ring {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            border: 1px solid #4a9eff;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: rotate 15s linear infinite reverse;
+        }
+
+        .core-ring {
+            position: absolute;
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+            border: 2px solid #4a9eff;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: rotate 10s linear infinite;
+            box-shadow: 0 0 15px rgba(74, 158, 255, 0.3);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .arc-reactor {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, #ffffff 0%, #4a9eff 70%, #1a3a5f 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px #4a9eff, 0 0 40px #4a9eff;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 20px #4a9eff, 0 0 40px #4a9eff;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.1);
+                box-shadow: 0 0 25px #4a9eff, 0 0 50px #4a9eff;
+            }
+        }
+
+        .hud-panel {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #4a9eff;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 11px;
+            padding: 12px;
+        }
+
+        .hud-panel:hover {
+            background: rgba(74, 158, 255, 0.1);
+            box-shadow: 0 0 15px rgba(74, 158, 255, 0.3);
+        }
+
+        .top-left-panel {
+            top: 30px;
+            left: 30px;
+            width: 180px;
+            height: 100px;
+            clip-path: polygon(0 0, 85% 0, 100% 15%, 100% 100%, 0 100%);
+        }
+
+        .top-right-panel {
+            top: 30px;
+            right: 30px;
+            width: 180px;
+            height: 100px;
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%, 0 15%);
+        }
+
+        .bottom-left-panel {
+            bottom: 30px;
+            left: 30px;
+            width: 180px;
+            height: 100px;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+        }
+
+        .bottom-right-panel {
+            bottom: 30px;
+            right: 30px;
+            width: 180px;
+            height: 100px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 15% 100%, 0 85%);
+        }
+
+        .panel-header {
+            font-size: 9px;
+            color: #6bb6ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #4a9eff;
+            padding-bottom: 3px;
+        }
+
+        .panel-data {
+            font-size: 10px;
+            line-height: 1.3;
+            color: #4a9eff;
+        }
+
+        .status-indicators {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4a9eff;
+            animation: statusBlink 2s ease-in-out infinite;
+        }
+
+        .status-dot:nth-child(2) { animation-delay: 0.5s; }
+        .status-dot:nth-child(3) { animation-delay: 1s; }
+
+        @keyframes statusBlink {
+            0%, 80%, 100% { opacity: 0.3; }
+            40% { opacity: 1; }
+        }
+
+        .targeting-system {
+            position: absolute;
+            top: 25%;
+            right: 15%;
+            width: 80px;
+            height: 80px;
+            border: 1px solid #4a9eff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: targetScan 5s ease-in-out infinite;
+        }
+
+        .targeting-system:hover {
+            box-shadow: 0 0 20px rgba(74, 158, 255, 0.5);
+        }
+
+        .targeting-system::before,
+        .targeting-system::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 1px;
+            background: #4a9eff;
+            transform: translate(-50%, -50%);
+        }
+
+        .targeting-system::after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        @keyframes targetScan {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+            50% { transform: scale(1.05) rotate(180deg); opacity: 1; }
+        }
+
+        .data-readout {
+            position: absolute;
+            left: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 200px;
+            height: 200px;
+            overflow: hidden;
+            border-left: 1px solid #4a9eff;
+            padding-left: 10px;
+        }
+
+        .data-line {
+            font-size: 9px;
+            color: #4a9eff;
+            margin: 3px 0;
+            opacity: 0;
+            animation: dataFlow 0.6s ease-in-out forwards;
+        }
+
+        @keyframes dataFlow {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 0.8; transform: translateX(0); }
+        }
+
+        .power-grid {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 15px;
+            border: 1px solid #4a9eff;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .power-level {
+            height: 100%;
+            width: 87%;
+            background: linear-gradient(90deg, #1a3a5f 0%, #4a9eff 100%);
+            border-radius: 2px;
+            animation: powerPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes powerPulse {
+            0%, 100% { width: 87%; opacity: 0.8; }
+            50% { width: 90%; opacity: 1; }
+        }
+
+        .radar-display {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #4a9eff;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.8);
+            overflow: hidden;
+        }
+
+        .radar-sweep {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1px;
+            height: 45%;
+            background: linear-gradient(to bottom, #4a9eff, transparent);
+            transform-origin: bottom center;
+            animation: radarSweep 4s linear infinite;
+        }
+
+        @keyframes radarSweep {
+            from { transform: translate(-50%, -100%) rotate(0deg); }
+            to { transform: translate(-50%, -100%) rotate(360deg); }
+        }
+
+        .radar-contact {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #4a9eff;
+            border-radius: 50%;
+            animation: contactBlink 3s ease-in-out infinite;
+        }
+
+        .contact-1 { top: 25%; left: 35%; animation-delay: 0s; }
+        .contact-2 { top: 55%; right: 30%; animation-delay: 1s; }
+
+        @keyframes contactBlink {
+            0%, 70%, 100% { opacity: 0; }
+            35% { opacity: 1; }
+        }
+
+        .nav-controls {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-button {
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid #4a9eff;
+            color: #4a9eff;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+        }
+
+        .nav-button:hover {
+            background: rgba(74, 158, 255, 0.2);
+            box-shadow: 0 0 10px rgba(74, 158, 255, 0.3);
+        }
+
+        .nav-button.active {
+            background: rgba(74, 158, 255, 0.3);
+            box-shadow: 0 0 15px rgba(74, 158, 255, 0.5);
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(74, 158, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(74, 158, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        .boot-sequence {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #4a9eff;
+            font-size: 14px;
+            text-align: center;
+            opacity: 0;
+            animation: bootUp 3s ease-in-out forwards;
+        }
+
+        @keyframes bootUp {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hud-container">
+        <div class="grid-overlay"></div>
+        <div class="scan-lines"></div>
+        
+        <div class="boot-sequence" id="bootSequence">
+            MARK VII INITIALIZING...<br>
+            SYSTEMS ONLINE
+        </div>
+
+        <div class="crosshair" id="crosshair"></div>
+        
+        <div class="status-indicators">
+            <div class="status-dot"></div>
+            <div class="status-dot"></div>
+            <div class="status-dot"></div>
+        </div>
+
+        <div class="main-hud">
+            <div class="outer-ring"></div>
+            <div class="inner-ring"></div>
+            <div class="core-ring"></div>
+            <div class="arc-reactor"></div>
+        </div>
+
+        <div class="hud-panel top-left-panel" onclick="togglePanel(this)">
+            <div class="panel-header">Power Systems</div>
+            <div class="panel-data">
+                ARC REACTOR: ONLINE<br>
+                OUTPUT: 8.2 GJ/s<br>
+                EFFICIENCY: 97.3%<br>
+                TEMP: 2847°F
+            </div>
+        </div>
+
+        <div class="hud-panel top-right-panel" onclick="togglePanel(this)">
+            <div class="panel-header">Targeting Sys</div>
+            <div class="panel-data">
+                TARGET LOCK: STANDBY<br>
+                RANGE: 2.4 KM<br>
+                ACCURACY: 99.7%<br>
+                ROUNDS: 847/1000
+            </div>
+        </div>
+
+        <div class="hud-panel bottom-left-panel" onclick="togglePanel(this)">
+            <div class="panel-header">Suit Status</div>
+            <div class="panel-data">
+                INTEGRITY: 100%<br>
+                THRUSTERS: READY<br>
+                REPULSORS: ARMED<br>
+                UNIBEAM: STANDBY
+            </div>
+        </div>
+
+        <div class="hud-panel bottom-right-panel" onclick="togglePanel(this)">
+            <div class="panel-header">Navigation</div>
+            <div class="panel-data">
+                ALTITUDE: 3,247 FT<br>
+                VELOCITY: 0 MPH<br>
+                HEADING: 042°<br>
+                GPS: LOCKED
+            </div>
+        </div>
+
+        <div class="targeting-system" onclick="lockTarget()"></div>
+
+        <div class="data-readout" id="dataReadout">
+            <!-- Data lines will be generated dynamically -->
+        </div>
+
+        <div class="power-grid">
+            <div class="power-level"></div>
+        </div>
+
+        <div class="radar-display">
+            <div class="radar-sweep"></div>
+            <div class="radar-contact contact-1"></div>
+            <div class="radar-contact contact-2"></div>
+        </div>
+
+        <div class="nav-controls">
+            <button class="nav-button" onclick="setMode('standby')">Standby</button>
+            <button class="nav-button" onclick="setMode('flight')">Flight</button>
+            <button class="nav-button" onclick="setMode('combat')">Combat</button>
+        </div>
+    </div>
+
+    <script>
+        let currentMode = 'standby';
+        let isBooted = false;
+
+        // Boot sequence
+        setTimeout(() => {
+            document.getElementById('bootSequence').style.display = 'none';
+            isBooted = true;
+            initializeDataStream();
+        }, 3000);
+
+        // Mouse tracking for crosshair
+        document.addEventListener('mousemove', (e) => {
+            if (!isBooted) return;
+            
+            const crosshair = document.getElementById('crosshair');
+            crosshair.style.left = e.clientX + 'px';
+            crosshair.style.top = e.clientY + 'px';
+        });
+
+        // Data stream generator
+        function initializeDataStream() {
+            const dataContainer = document.getElementById('dataReadout');
+            const systemData = [
+                'SYS_CORE_TEMP: 2847°F',
+                'POWER_OUTPUT: 8.2GJ/s',
+                'ALTITUDE: 3247 FT',
+                'VELOCITY: 0 MPH',
+                'HEADING: 042°',
+                'TARGET_LOCK: STANDBY',
+                'INTEGRITY: 100%',
+                'REPULSORS: ARMED',
+                'UNIBEAM: STANDBY',
+                'GPS_STATUS: LOCKED',
+                'COMMS: ENCRYPTED',
+                'JARVIS: ONLINE'
+            ];
+
+            setInterval(() => {
+                if (!isBooted) return;
+                
+                const line = document.createElement('div');
+                line.className = 'data-line';
+                line.textContent = systemData[Math.floor(Math.random() * systemData.length)];
+                
+                dataContainer.appendChild(line);
+                
+                if (dataContainer.children.length > 15) {
+                    dataContainer.removeChild(dataContainer.firstChild);
+                }
+            }, 800);
+        }
+
+        // Panel interaction
+        function togglePanel(panel) {
+            if (!isBooted) return;
+            
+            panel.style.background = 'rgba(74, 158, 255, 0.2)';
+            panel.style.boxShadow = '0 0 20px rgba(74, 158, 255, 0.5)';
+            
+            generateBeep(800, 0.1);
+            
+            setTimeout(() => {
+                panel.style.background = 'rgba(0, 0, 0, 0.7)';
+                panel.style.boxShadow = 'none';
+            }, 300);
+        }
+
+        // Target lock
+        function lockTarget() {
+            if (!isBooted) return;
+            
+            const target = document.querySelector('.targeting-system');
+            target.style.boxShadow = '0 0 30px #4a9eff';
+            target.style.borderColor = '#6bb6ff';
+            
+            generateBeep(1200, 0.4);
+            
+            setTimeout(() => {
+                target.style.boxShadow = 'none';
+                target.style.borderColor = '#4a9eff';
+            }, 1200);
+        }
+
+        // Mode switching
+        function setMode(mode) {
+            if (!isBooted) return;
+            
+            currentMode = mode;
+            
+            // Update button states
+            document.querySelectorAll('.nav-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Visual feedback
+            const flash = document.createElement('div');
+            flash.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(74, 158, 255, 0.1);
+                pointer-events: none;
+                z-index: 1000;
+                animation: modeFlash 0.5s ease-out forwards;
+            `;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes modeFlash {
+                    0% { opacity: 0.1; }
+                    50% { opacity: 0.05; }
+                    100% { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(flash);
+            generateBeep(600, 0.2);
+            
+            setTimeout(() => {
+                if (flash.parentNode) {
+                    flash.parentNode.removeChild(flash);
+                }
+            }, 500);
+        }
+
+        // Audio feedback
+        function generateBeep(frequency, duration) {
+            if (!window.audioContext) {
+                try {
+                    window.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                } catch (e) {
+                    return; // Audio not supported
+                }
+            }
+            
+            const oscillator = window.audioContext.createOscillator();
+            const gainNode = window.audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(window.audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(frequency, window.audioContext.currentTime);
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.05, window.audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, window.audioContext.currentTime + duration);
+            
+            oscillator.start(window.audioContext.currentTime);
+            oscillator.stop(window.audioContext.currentTime + duration);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (!isBooted) return;
+            
+            switch(e.key) {
+                case '1':
+                    setMode('standby');
+                    break;
+                case '2':
+                    setMode('flight');
+                    break;
+                case '3':
+                    setMode('combat');
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    lockTarget();
+                    break;
+            }
+        });
+
+        // Initialize standby mode
+        setTimeout(() => {
+            if (isBooted) {
+                document.querySelector('.nav-button').classList.add('active');
+            }
+        }, 3500);
+    </script>
+</body>
+</html>
