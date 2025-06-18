@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div class="status-indicators">
+        <div class="status-dot"></div>
+        <div class="status-dot"></div>
+        <div class="status-dot"></div>
+    </div>
+
+    <div class="hud-panel top-left-panel" onclick="togglePanel(this)">
+        <div class="panel-header">Power Systems</div>
+        <div class="panel-data">
+            ARC REACTOR: ONLINE<br>
+            OUTPUT: 8.2 GJ/s<br>
+            EFFICIENCY: 97.3%<br>
+            TEMP: 2847°F
+        </div>
+    </div>
+
+    <div class="hud-panel top-right-panel" onclick="togglePanel(this)">
+        <div class="panel-header">Targeting Sys</div>
+        <div class="panel-data">
+            TARGET LOCK: STANDBY<br>
+            RANGE: 2.4 KM<br>
+            ACCURACY: 99.7%<br>
+            ROUNDS: 847/1000
+        </div>
+    </div>
+
+    <div class="hud-panel bottom-left-panel" onclick="togglePanel(this)">
+        <div class="panel-header">Suit Status</div>
+        <div class="panel-data">
+            INTEGRITY: 100%<br>
+            THRUSTERS: READY<br>
+            REPULSORS: ARMED<br>
+            UNIBEAM: STANDBY
+        </div>
+    </div>
+
+    <div class="hud-panel bottom-right-panel" onclick="togglePanel(this)">
+        <div class="panel-header">Navigation</div>
+        <div class="panel-data">
+            ALTITUDE: 3,247 FT<br>
+            VELOCITY: 0 MPH<br>
+            HEADING: 042°<br>
+            GPS: LOCKED
+        </div>
+    </div>
+
+    <div class="power-grid">
+        <div class="power-level"></div>
+    </div>
+
+
+    <div class="nav-controls">
+        <a href="/Menu/index.html" class="nav-button">Menu</a>
+        <a href="/Armor/index.html" class="nav-button">Armor</a>
+        <a href="/Autopilot/index.html" class="nav-button">Autopilot</a>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="hud-clock" id="hudClock">
+        <div class="clock-time" id="clockTime">00:00:00</div>
+        <div class="clock-date" id="clockDate">YYYY-MM-DD</div>
+    </div>
+
+
+
+
+    <div class="usage-monitor">
+        <div class="monitor-header">System Monitor</div>
+
+        <div class="usage-bar">
+            <div class="label">CPU</div>
+            <div class="bar-bg">
+                <div class="bar-fill cpu-fill"></div>
+            </div>
+        </div>
+
+        <div class="usage-bar">
+            <div class="label">Power</div>
+            <div class="bar-bg">
+                <div class="bar-fill power-fill"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
