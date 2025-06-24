@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fly-Mode</title>
+    <link rel="stylesheet" href="flypage.css">
+</head>
+<body>
+    <div id="content">
+        <!--1e column-->
+        <div id="lines">
+            <div id="longline"></div>
+            <div class="shortline"></div>
+            <div class="shortline"></div>
+            <div class="shortline"></div>
+        </div>
+        <!--2e column-->
+        <div id="travelinfo">
+            <div id="kmhborder">
+                <div id="kmhinnerborder">
+                    <div id="kmhinner">
+                        <p id="speedmeter">150 KM/H</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="speedtxtblock"><p id="speedtxt">speed</p></div>
+
+            <div id="gps">
+                <p id="gpstxt">GPS</p>
+
+                <svg width="100%" height="100%" viewBox="0 0 400 250">
+                    <path id="gpsPath" 
+                    d="M10,200 
+                    C70,100 130,300 190,200 
+                    S310,100 370,200" 
+                    stroke="#ffffff" 
+                    fill="none" 
+                    stroke-width="3" />
+                    
+                    <circle r="8" fill="#000000">
+                        <animateMotion repeatCount="indefinite" dur="10s">
+                            <mpath href="#gpsPath" />
+                        </animateMotion>
+                     </circle>
+                    </svg>
+
+            </div>
+
+            <div id="fulebox">
+                <div id="fulemeter">
+                    <div id="fule"></div>
+                </div>
+
+                <div id="fuletxtbox"><p id="fuletxt">Fule</p></div>
+
+                <div id="button">
+                    <div class="hover-buttons">
+                      <a href="/main" class="hover-button">Main</a>
+                      <a href="/fly" class="hover-button">Fly</a>
+                      <a href="/armor" class="hover-button">Armor</a>
+                    </div>
+                  </div>
+                  
+            </div>
+        </div>
+            <!--3e column-->
+            <div id="view">
+                <div id="viewwindowborder">
+                    <img src="./img/viewimg.jpg" id="viewwindow">
+                </div>
+            </div>
+            <!--4e column-->
+            <div id="column4">
+                <div id="rotate">
+                    <div id="rorateborder">
+                        <div id="rotateinnerborder">
+                            <div id="rotateinner">
+                                <p id="rotatemeter">0°</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div id="rotatetxtblock"><p id="rotatetxt">rotation</p></div>
+            </div>
+            <!--5e column-->
+            <div id="column5">
+
+                 <div id="armorinfoborder">
+                      <div id="armorinfo">
+                            <div id="head" class="hoverpart"></div>
+                            <div id="leftarm" class="hoverpart"></div>
+                            <div id="body" class="hoverpart"></div>
+                            <div id="rightarm" class="hoverpart"></div>
+                            <div id="leftleg" class="hoverpart"></div>
+                            <div id="rightleg" class="hoverpart"></div>
+
+                            <a href="/armor" id="armorbutton">More armor details</a>
+                      </div>
+                 </div>
+
+                <div id="aline"></div>
+
+                 <div id="ammorow">
+
+                    <div id="aniammoborder">
+                        <div id="aniammoinner"></div>
+                    </div>
+
+                   <div id="ammoborder">
+                      <div id="a1" class="ammo"></div>
+                      <div id="a2" class="ammo"></div>
+                      <div id="a3" class="ammo"></div>
+                     <div id="a4" class="ammo"></div>
+                      <div id="a5" class="ammo"></div>
+                     <div id="a6" class="ammo"></div>
+                     <div id="a7" class="ammo"></div>
+                     <div id="a8" class="ammo"></div>
+                 </div>
+
+                      <div id="random3hoek"></div>
+
+                      <div id="ammotxtblock"></div>
+                </div>
+
+                <div id="driehoek"></div>
+
+            </div>
+    </div>
+    <script src="flypage.js"></script>
+</body>
+</html>
