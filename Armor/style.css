@@ -50,8 +50,10 @@ body::before {
         opacity: 0.8;
     }
 }
-
-
+#ironman{
+    border-radius: 50px;
+    border: 1px solid #4a9eff;
+}
 
 
 
