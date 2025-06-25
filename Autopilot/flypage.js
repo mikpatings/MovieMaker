@@ -1,4 +1,3 @@
- /* speed animation */
  const speedEl = document.getElementById("speedmeter");
 
   let value = 150;
@@ -14,7 +13,6 @@
 
   setInterval(updateSpeed, 45);
 
-/*rotate animation */
 const rotateEl = document.getElementById("rotatemeter");
   let angle = 0;
   let angleDirection = 1;

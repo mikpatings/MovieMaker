@@ -8,5 +8,5 @@ function updateClock() {
 }
 
 setInterval(updateClock, 1);
-updateClock(); // initial call
+updateClock();
 
