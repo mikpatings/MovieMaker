@@ -18,7 +18,7 @@ body {
 #content{
     display: flex;
 }
-
+/*1e column*/
 #lines{
     width: 30px;
     height: 900px;
@@ -38,7 +38,7 @@ body {
     background-color: #0062d3;
     box-shadow: 0px 0px 10px 3px #0062d3;
 }
-
+/*2e column*/
 #travelinfo{
     width: 310px;
     height: 900px;
@@ -120,11 +120,19 @@ body {
 }
 #gps{
     width: 400px;
-    height: 250px;
+    height: 240px;
     background-color: #0062d3;
     margin-top: 25px;
     box-shadow: 0px 0px 10px 3px #0062d3;
     border-radius: 10px;
+    padding: 10px;
+}
+#gpstxt{
+    color: white;
+}
+#gps svg {
+  position: relative;
+  top: -60px;
 }
 #fulebox{
     height: 275px;
@@ -176,20 +184,55 @@ body {
     color: white;
     font-size: 20px;
 }
-#button{
-    width: 175px;
-    height: 175px;
-    border-radius: 50%;
-    margin-left: 150px;
-    margin-top: -260px;
-    background-color: #0062d3;
-    box-shadow: 0px 0px 10px 3px #0062d3;
+#button {
+  width: 175px;
+  height: 175px;
+  border-radius: 50%;
+  margin-left: 150px;
+  margin-top: -260px;
+  background-color: #0a85ff;
+  box-shadow:
+    0 0 20px 5px #00e1ff,
+    inset 0 0 15px 5px #00e1ff;
+  background-image:
+    radial-gradient(circle at center, #aef3ff 10%, #0a85ff 40%, #003b66 75%, #000814 100%),
+    repeating-radial-gradient(circle at center, transparent 0px, transparent 4px, #00e1ff30 5px, transparent 6px);
+  border: 3px solid #00bad2;
+  position: relative;
+  transition: all 0.3s ease;
 }
-#button:hover{
-    background-color: #002e63;
-    box-shadow: 0px 0px 10px 3px #002e63;
-    transform: scale(1.25);
+
+#button:hover {
+  background-color: #002e63;
+  box-shadow: 0px 0px 10px 3px #002e63;
+  transform: scale(1.25);
+
+  background-image: none;
+  border: none;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow:
+      0 0 20px 5px #00bad2,
+      inset 0 0 15px 5px #00bad2;
   }
+  50% {
+    box-shadow:
+      0 0 30px 10px #00bad2,
+      inset 0 0 20px 10px #00bad2;
+  }
+  100% {
+    box-shadow:
+      0 0 20px 5px #00bad2,
+      inset 0 0 15px 5px #00bad2;
+  }
+}
+
+#button {
+  animation: pulse 2.5s infinite;
+}
+
   .hover-buttons {
     display: none;
     position: absolute;
@@ -222,7 +265,7 @@ body {
   .hover-button:hover {
     background-color: rgba(0, 0, 0, 0.4);
   }
-
+/*3e column*/
 #view{
     width: 610px;
     height: 900px;
@@ -245,6 +288,9 @@ body {
     height: 585px;
     background-color: white;
     border-radius: 50%;
+}
+#viewwindow:hover {
+  content: url('/img/viewing2.jpg');
 }
 /*4e column*/
 #column4{
@@ -276,7 +322,7 @@ body {
     border-right: 12.5px solid #002e63;
     box-shadow: 0px 0px 10px 3px #002e63;
     animation-name: spin2;
-    animation-duration: 5000ms;
+    animation-duration: 7800ms;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     padding: 12.5px;
@@ -302,7 +348,7 @@ body {
     align-items: center;
     justify-content: center;
     animation-name: nothing2;
-    animation-duration: 5000ms;
+    animation-duration: 7800ms;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
@@ -337,6 +383,7 @@ body {
     color: white;
     font-size: 30px;
 }
+/* 5e cloumn*/
 #column5{
     width: 430px;
     height: 900px;
@@ -414,7 +461,18 @@ body {
 .hoverpart:hover {
     background-color: red; 
     box-shadow: 0px 0px 10px 0px rgb(255, 0, 0);
-  }
+}
+#armorbutton{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    width: 180px;
+    margin-top: 500px;
+    margin-left: -150px;
+}
+#armorbutton:hover{
+    color: red;
+}
 #aline{
     height: 200px;
     width: 25px;
@@ -459,67 +517,26 @@ body {
     display: flex;
     margin-left: 25px;
 }
-#a1{
-    animation-name: reload;
-    animation-duration: 10s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-}
-#a2{
-    animation-name: reload;
-    animation-duration: 10s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 10s;
-}
-#a3{
-    animation-name: reload;
-    animation-duration: 10s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 20s;
-}
-#a4{
-    animation-name: reload;
-    animation-duration: 10s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 30s;
-}
-#a5{
-    animation-name: reload;
-    animation-duration: 10s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 40s;
-}
-#a6{
-    animation-name: reload;
-    animation-duration: 10s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 50s;
-}
-#a7{
-    animation-name: reload;
-    animation-duration: 10s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 60s;
-}
-#a8{
-    animation-name: reload;
-    animation-duration: 10s;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-delay: 70s;
-}
-.ammo{
+.ammo {
     height: 100px;
     width: 25px;
     margin-left: 3.5%;
     background-color: #002e63;
+    animation-name: reload;
+    animation-duration: 10s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
 }
+#a1 { animation-delay: 0s; }
+#a2 { animation-delay: 10s; }
+#a3 { animation-delay: 20s; }
+#a4 { animation-delay: 30s; }
+#a5 { animation-delay: 40s; }
+#a6 { animation-delay: 50s; }
+#a7 { animation-delay: 60s; }
+#a8 { animation-delay: 70s; }
+
 @keyframes reload{
     from{
         opacity: 1;
@@ -540,9 +557,9 @@ body {
     margin-left: 310px;
     color: #0062d3;
 }
-
+/*responsive*/
 @media screen and (max-width: 1750px){
-
+    /*1e column*/
 #lines{
     width: 30px;
     height: 900px;
@@ -559,7 +576,7 @@ body {
     margin-top: 30px;
 
 }
-
+/*2e column*/
 #travelinfo{
     width: 250px;
     height: 900px;
@@ -651,7 +668,7 @@ body {
     left: 0;
     border-radius: 50%;
     overflow: hidden;
-    pointer-events: none;
+    pointer-events: none; /* prevent blocking the hover */
   }
   
   #button:hover .hover-buttons {
@@ -673,7 +690,7 @@ body {
   .hover-button:hover {
     background-color: rgba(0, 0, 0, 0.4);
   }
-
+/*3e column*/
 #view{
     width: 510px;
     height: 900px;
@@ -694,7 +711,7 @@ body {
     height: 485px;
     border-radius: 50%;
 }
-
+/*4e column*/
 #column4{
     height: 900px;
     width: 240px;
@@ -743,7 +760,7 @@ body {
 #rotatetxt{
     font-size: 30px;
 }
-
+/* 5e cloumn*/
 #column5{
     width: 330px;
     height: 900px;
@@ -833,6 +850,14 @@ body {
     margin: 10px;
     margin-left: 10px;
     margin-top: 290px;
+}
+#armorbutton{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    width: 160px;
+    margin-top: 425px;
+    margin-left: -130px;
 }
 #ammoborder{
     width: 250px;

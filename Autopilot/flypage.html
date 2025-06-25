@@ -8,26 +8,45 @@
 </head>
 <body>
     <div id="content">
-
+        <!--1e column-->
         <div id="lines">
             <div id="longline"></div>
             <div class="shortline"></div>
             <div class="shortline"></div>
             <div class="shortline"></div>
         </div>
-
+        <!--2e column-->
         <div id="travelinfo">
             <div id="kmhborder">
                 <div id="kmhinnerborder">
                     <div id="kmhinner">
-                        <p id="speedmeter">KM/H</p>
+                        <p id="speedmeter">150 KM/H</p>
                     </div>
                 </div>
             </div>
 
             <div id="speedtxtblock"><p id="speedtxt">speed</p></div>
 
-            <div id="gps"></div>
+            <div id="gps">
+                <p id="gpstxt">GPS</p>
+
+                <svg width="100%" height="100%" viewBox="0 0 400 250">
+                    <path id="gpsPath" 
+                    d="M10,200 
+                    C70,100 130,300 190,200 
+                    S310,100 370,200" 
+                    stroke="#ffffff" 
+                    fill="none" 
+                    stroke-width="3" />
+                    
+                    <circle r="8" fill="#000000">
+                        <animateMotion repeatCount="indefinite" dur="10s">
+                            <mpath href="#gpsPath" />
+                        </animateMotion>
+                     </circle>
+                    </svg>
+
+            </div>
 
             <div id="fulebox">
                 <div id="fulemeter">
@@ -38,27 +57,27 @@
 
                 <div id="button">
                     <div class="hover-buttons">
-                      <a href="/main" class="hover-button">Main</a>
-                      <a href="/fly" class="hover-button">Fly</a>
-                      <a href="/armor" class="hover-button">Armor</a>
+                      <a href="../Menu/index.html" class="hover-button">Menu</a>
+                      <a href="../Autopilot/flypage.html" class="hover-button">Fly</a>
+                      <a href="../Armor/index.html" class="hover-button">Armor</a>
                     </div>
                   </div>
                   
             </div>
         </div>
-
+            <!--3e column-->
             <div id="view">
                 <div id="viewwindowborder">
-                    <img src="./img/viewimg.jpg" id="viewwindow">
+                    <img src="../Autopilot/viewimg.jpg" id="viewwindow">
                 </div>
             </div>
-
+            <!--4e column-->
             <div id="column4">
                 <div id="rotate">
                     <div id="rorateborder">
                         <div id="rotateinnerborder">
                             <div id="rotateinner">
-                                <p id="rotatemeter">Rotation</p>
+                                <p id="rotatemeter">0°</p>
                             </div>
                         </div>
                     </div>
@@ -66,7 +85,7 @@
 
                  <div id="rotatetxtblock"><p id="rotatetxt">rotation</p></div>
             </div>
-
+            <!--5e column-->
             <div id="column5">
 
                  <div id="armorinfoborder">
@@ -77,6 +96,7 @@
                             <div id="rightarm" class="hoverpart"></div>
                             <div id="leftleg" class="hoverpart"></div>
                             <div id="rightleg" class="hoverpart"></div>
+
                       </div>
                  </div>
 
